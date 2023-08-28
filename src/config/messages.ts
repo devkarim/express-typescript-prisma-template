@@ -4,6 +4,8 @@ const Messages = {
   errors: {
     invalidCredentials: "Invalid email or password.",
     emailTaken: "Email is already taken.",
+    unauthenticated: "You need to be authenticated to do that.",
+    unauthorized: "You need to be authorized to do that.",
   },
   limits: {
     password: {
