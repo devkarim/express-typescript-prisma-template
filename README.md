@@ -45,7 +45,7 @@ PORT=
 
 DATABASE_URL=
 
-SESSION_SECRET
+SESSION_SECRET=
 ```
 
 You can check [.env.example](https://github.com/devkarim/express-typescript-prisma-template/blob/main/.env.example) for more information.
