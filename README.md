@@ -43,6 +43,8 @@ NODE_ENV=
 PORT=
 
 DATABASE_URL=
+
+SESSION_SECRET
 ```
 
 You can check [.env.example](https://github.com/devkarim/express-typescript-prisma-template/blob/main/.env.example) for more information.
@@ -54,6 +56,14 @@ Use one of the following commands to start the development server:
 - `npm run dev`
 - `yarn dev`
 - `pnpm dev`
+
+### Build server and run
+
+Use one of the following commands to build & run the server:
+
+- `npm run start`
+- `yarn start`
+- `pnpm start`
 
 ## Author
 
