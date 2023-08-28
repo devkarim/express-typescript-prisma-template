@@ -1,10 +1,13 @@
 import { Response } from "express";
 
-import { BaseResponse, ErrorResponse } from "./api";
+import { BaseResponse, BaseResponseNoData, ErrorResponse } from "./api";
 import Exception from "./error";
 
 class ServerResponse {
-  static success<T>(res: Response<BaseResponse<T>>, data: T) {
+  static success<T>(
+    res: Response<BaseResponse<T> | BaseResponseNoData>,
+    data?: T
+  ) {
     return res.json({ success: true, data });
   }
 
