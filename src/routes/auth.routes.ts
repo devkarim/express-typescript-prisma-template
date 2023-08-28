@@ -26,7 +26,7 @@ authRouter.post("/register", authValidator.register, authController.register);
 
 // @route     GET /auth/me
 // @desc      Fetches current session data
-// @access    Public
+// @access    Private
 authRouter.get("/me", requireAuth, authController.me);
 
 export default authRouter;
