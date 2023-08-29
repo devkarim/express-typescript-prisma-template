@@ -4,43 +4,34 @@ moduleAlias.addAlias("@", __dirname);
 
 import "./services/passport";
 
+import http from "http";
 import cors from "cors";
-import express from "express";
+import express, { Handler } from "express";
 import passport from "passport";
-import session from "express-session";
-import { PrismaSessionStore } from "@quixo3/prisma-session-store";
+import { Server } from "socket.io";
 
-import prisma from "./lib/prisma";
 import { env } from "./config/env";
 import apiRouter from "./routes/api";
 import errorLogger from "./middlewares/error/error-logger";
 import errorSender from "./middlewares/error/error-sender";
 import errorHandler from "./middlewares/error/error-handler";
-import { API_DOMAIN, API_URL, isProduction } from "./config/constants";
+import { API_URL, isProduction } from "./config/constants";
+import session from "./lib/session";
+import AppSocket from "./models/socket";
 
 const app = express();
+const server = http.createServer(app);
+
+// Create socket server
+AppSocket.create(server);
+
+/* Middlewares for REST API */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "localhost" }));
 if (isProduction) app.set("trust proxy", 1);
-app.use(
-  session({
-    cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000, // ms
-      secure: isProduction,
-      domain: API_DOMAIN,
-    },
-    secret: env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    store: new PrismaSessionStore(prisma, {
-      checkPeriod: 2 * 60 * 1000, //ms
-      dbRecordIdIsSessionId: true,
-      dbRecordIdFunction: undefined,
-    }),
-  })
-);
+app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -52,6 +43,6 @@ app.use(errorLogger);
 app.use(errorSender);
 
 // Listen
-app.listen(env.PORT, () => {
+server.listen(env.PORT, () => {
   console.log(`Listening on ${API_URL}...`);
 });
