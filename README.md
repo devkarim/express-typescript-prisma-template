@@ -1,8 +1,8 @@
-# express-typescript-prisma-template
+# express-socket-typescript-prisma-template
 
 ## Overview
 
-This is a Node.js backend template / boilerplate using TypeScript, Express.js 5, Prisma ORM, and Passport.js. with type-safety & module-alias.
+This is a Node.js backend template / boilerplate using TypeScript, Express.js 5, Socket.IO, Prisma ORM, and Passport.js with type-safety & module-alias.
 
 ## Dependencies
 
@@ -10,6 +10,7 @@ This is a Node.js backend template / boilerplate using TypeScript, Express.js 5,
 - [Express.js](https://expressjs.com)
 - [Prisma ORM](https://www.prisma.io)
 - [Passport.js](https://www.passportjs.org)
+- [Socket.IO](https://socket.io)
 - [Zod](https://zod.dev)
 - [zod-express-validator](https://www.npmjs.com/package/zod-express-validator)
 - [module-alias](https://www.npmjs.com/package/module-alias)
