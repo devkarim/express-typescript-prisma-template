@@ -1,9 +1,9 @@
-import bcrypt from "bcrypt";
+import * as argon2 from "argon2";
 
 export const hash = (text: string) => {
-  return bcrypt.hash(text, 10);
+  return argon2.hash(text);
 };
 
 export const comparePasswords = (text: string, hashed: string) => {
-  return bcrypt.compare(text, hashed);
+  return argon2.verify(hashed, text);
 };
