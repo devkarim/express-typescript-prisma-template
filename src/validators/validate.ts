@@ -1,12 +1,7 @@
-import { Schemas, validate as zodValidate } from "@/lib/validation";
-import Exception from "@/models/error";
+import { Schemas, validate as zodValidate } from "zod-express-validator";
 
 const validate = <P, Q extends PropertyDescriptor & ThisType<any>, B, R>(
   schemas: Schemas<P, Q, B, R>
-) =>
-  zodValidate(schemas, ({ bodyError, paramsError, queryError }, res) => {
-    const error = bodyError ?? paramsError ?? queryError;
-    if (error) throw Exception.fromZod(error);
-  });
+) => zodValidate(schemas);
 
 export default validate;

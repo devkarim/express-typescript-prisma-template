@@ -1,5 +1,6 @@
 import { ZodError } from "zod";
 import { AxiosError } from "axios";
+import { RequestValidationError } from "zod-express-validator";
 
 class Exception extends Error {
   constructor(public message: string, public statusCode: number) {
@@ -20,6 +21,10 @@ class Exception extends Error {
     }
     if (err instanceof Error) {
       return this.fromError(err);
+    }
+    if(err instanceof RequestValidationError) {
+      const error = err.errors.bodyError ?? err.errors.paramsError ?? err.errors.queryError;
+      return this.fromZod(error!);
     }
     return this.fromError(new Error("Internal server error"));
   }
