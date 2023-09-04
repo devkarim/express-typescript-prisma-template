@@ -1,4 +1,4 @@
-import argon2 from "argon2";
+import * as argon2 from "argon2";
 
 export const hash = (text: string) => {
   return argon2.hash(text);
